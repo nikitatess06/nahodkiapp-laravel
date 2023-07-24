@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,5 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/findings/create', function () {
-    return view('findings-create');
+    return view('finding-create');
+});
+Route::post('/findings/create', 'FindingsController@store', function(Request $request) {
+    $name = $request->input('name');
+    $location = $request->input('location');
+    $contacts = $request->input('contacts');
 });

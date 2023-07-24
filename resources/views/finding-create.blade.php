@@ -15,7 +15,7 @@
     <label for="contacts">Контакты:</label>
     <input type="text" id="contacts" name="contacts" required><br><br>
 
-    <input type="submit" value="Создать находку">
+    <input type="submit" value="Подтвердить">
   </form>
 </body>
 </html>
