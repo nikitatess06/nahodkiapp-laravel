@@ -14,6 +14,6 @@ class FindingsController extends Controller
         $find->location = $request->location;
         $find->contacts = $request->contacts;
         $find->save();
-        return redirect('/flights');
+        return redirect('/findings');
     }
 }

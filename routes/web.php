@@ -21,5 +21,7 @@ Route::get('/findings/create', function () {
     return view('finding-create');
 });
 Route::post('/findings/create', 'FindingsController@store', function(Request $request) {
-    $input = $request->all();
+    $name = $request->input('name');
+    $location = $request->input('location');
+    $contacts = $request->input('contacts');
 });
