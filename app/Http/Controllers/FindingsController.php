@@ -10,9 +10,9 @@ class FindingsController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $find = new Finding; 
-        $find->name = $request->name;
-        $find->location = $request->location;
-        $find->contacts = $request->contacts;
+        $find->name = $request->input('name');
+        $find->location = $request->input('location');
+        $find->contacts = $request->input('contacts');
         $find->save();
         return redirect('/findings');
     }
