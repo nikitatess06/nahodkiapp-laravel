@@ -7,6 +7,7 @@
 <body>
   <h1>Создание новой находки</h1>
   <form action="/findings/create" method="POST">
+    @csrf
     <label for="name">Название:</label>
     <input type="text" id="name" name="name" required><br><br>
 

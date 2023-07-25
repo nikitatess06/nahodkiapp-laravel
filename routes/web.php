@@ -20,8 +20,16 @@ Route::get('/', function () {
 Route::get('/findings/create', function () {
     return view('finding-create');
 });
-Route::post('/findings/create', 'FindingsController@store', function(Request $request) {
+Route::post('/findings/create', function(Request $request) {
     $name = $request->input('name');
     $location = $request->input('location');
     $contacts = $request->input('contacts');
+    
+    $find = new App\Models\Finding;
+    $find->name = $name;
+    $find->location = $location;
+    $find->contacts = $contacts;
+    $find->save();
+    
+    return redirect('/findings');
 });
