@@ -33,3 +33,18 @@ Route::post('/findings/create', function(Request $request) {
     
     return redirect('/findings');
 });
+Route::get('/findings/{id}', function (string $id) {
+    $find = DB::table('findings')->where('id', $id)->first();
+    return view('finding_id')
+        ->with('name', $find->name)
+        ->with('location', $find->location)
+        ->with('contacts', $find->contacts);
+});
+Route::get('/findings', function () {
+    $findings = DB::table('findings')->get();
+    return view('findings_list')
+    ->with('findings', $findings);
+});
+Route::get('/', function () {
+    return redirect('/findings');
+});
