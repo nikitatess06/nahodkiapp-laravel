@@ -8,7 +8,7 @@
 <table>
   <thead>
     <tr>
-      <th>Находки]</th>
+      <th>Находки</th>
     </tr>
   </thead>
   <tbody>
