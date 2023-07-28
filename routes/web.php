@@ -25,7 +25,6 @@ Route::post('/findings/create', function(Request $request) {
     $name = $request->input('name');
     $location = $request->input('location');
     $contacts = $request->input('contacts');
-    
     $find = new App\Models\Finding;
     $find->name = $name;
     $find->location = $location;
@@ -49,3 +48,7 @@ Route::get('/findings', function () {
 Route::get('/', function () {
     return redirect('/findings');
 });
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');

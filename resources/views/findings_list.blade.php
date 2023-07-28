@@ -18,7 +18,11 @@
     </tr>
     @endforeach
 </tbody>
-</table>    
+</table>  
+  <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit">Выйти</button>
+</form>
     </body>
 </html>
 <a href=""></a>
