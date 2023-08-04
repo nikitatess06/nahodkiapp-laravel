@@ -15,19 +15,15 @@ class CreateTest extends DuskTestCase
     {   
         $this->browse(function ($browser) {
             $browser->visit('/findings/create')
-                    ->assertSee('Создание новой находки');
-        });
-
-        $this->browse(function ($browser) {
-            $browser->type('name', 'Название находки')
+                    ->pause(1000)
+                    ->assertSee('Создание новой находки')
+                    ->type('name', 'Название находки')
                     ->type('location', 'Местонахождение находки')
                     ->type('contacts', 'Контакты для связи')
                     ->press('Подтвердить');
-        });
-        
-        $this->browse(function ($browser) {
+
             $lastFinding = \App\Models\Finding::orderBy('id', 'desc')->first();
-            $browser->assertDatabaseHas('findings', [
+            $this->assertDatabaseHas('findings', [
                 'id' => $lastFinding->id,
                 'name' => 'Название находки',
                 'location' => 'Местонахождение находки',
