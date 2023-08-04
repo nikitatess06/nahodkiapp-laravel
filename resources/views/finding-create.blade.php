@@ -11,7 +11,7 @@
     <label for="name">Название:</label>
     <input type="text" id="name" name="name" required><br><br>
 
-    <label for="location">Место нахождения:</label>
+    <label for="location">Местонахождение:</label>
     <input type="text" id="location" name="location" required><br><br>
 
     <label for="contacts">Контакты:</label>

@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +16,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        for ($i = 0; $i < 100; $i++) {
+            DB::table('findings')->insert([
+            'name' => Str::random(100),
+            'location' => Str::random(100),
+            'contacts' => rand(1, 100),
+            ]);
+        }
+        DB::table('users')->insert([
+            'name' => Str::random(1),
+            'password' => Hash::make('password'),
+        ]);
     }
 }

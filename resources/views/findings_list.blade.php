@@ -22,7 +22,11 @@
   <form method="POST" action="{{ route('logout') }}">
     @csrf
     <button type="submit">Выйти</button>
-</form>
+  </form>
+  <form method="get" action="{{ route('create') }}">
+    @csrf
+    <button type="submit">Создать находку</button>
+  </form>
     </body>
 </html>
 <a href=""></a>

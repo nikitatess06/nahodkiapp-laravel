@@ -5,8 +5,21 @@
   <title>{{ $name }}</title>
 </head>
 <body>
-        <h1>{{ $name }}</h1>
-        <h2>{{ $location }}</h2>
-        <h2>{{ $contacts }}</h2> 
-    </body>
+    <h1>{{ $name }}</h1>
+    <h2>{{ $location }}</h2>
+    <h2>{{ $contacts }}</h2> 
+    @if (Auth::check())
+    <form action="/findings/{{ $find->id }}" method="POST">
+      @csrf
+      @method('DELETE')
+    <button type="submit">Удалить</button>
+    </form>
+    
+    <form action="/findings/{{ $find->id }}/edit" method="GET">
+    @csrf
+    <a href="/findings/{{ $find->id }}/edit">Редактировать</a>
+    </form>
+    @endif
+</body>
 </html>
+
