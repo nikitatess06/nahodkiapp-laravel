@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('location');
             $table->text('contacts');
+            $table->text('media')->nullable();
         });
     }
     public function down()

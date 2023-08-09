@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\DB;
 use App\Models\Finding;
+use Illuminate\Http\UploadedFile;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,10 +25,12 @@ Route::post('/findings/create', function(Request $request) {
     $name = $request->input('name');
     $location = $request->input('location');
     $contacts = $request->input('contacts');
+    $path = $request->file('photo')->store('media');
     $find = new App\Models\Finding;
     $find->name = $name;
     $find->location = $location;
     $find->contacts = $contacts;
+    $find->media = $path;
     $find->save();
     
     return redirect('/findings');
@@ -42,11 +45,16 @@ Route::get('/findings/{id}', function (string $id) {
         ->with('find', $find);
         
 });
+Route::get('/findings/{id}/file', function (string $id) {
+    $filepath = DB::table('findings')->where('id', $id)->value('media');
+    $path = storage_path('app/' . $filepath);
+    return response()->file($path);
+    
+});
 
 Route::get('/findings', function () {
-    $findings = DB::table('findings')->get();
-    return view('findings_list')
-    ->with('findings', $findings);
+    $findings = DB::table('findings')->simplePaginate(25);
+    return view('findings_list', [        'findings' => $findings,    ]);
 });
 
 Route::get('/', function () {

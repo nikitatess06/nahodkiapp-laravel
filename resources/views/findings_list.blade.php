@@ -14,11 +14,13 @@
   <tbody>
     @foreach ($findings as $finding)  
     <tr>
-      <td><a href="/findings/{{ $finding->id }}">{{ $finding->name }}</a></td>
+      <td><a href="/findings/{{ $finding->id }}">{{ $finding->name }}</a><img src="/findings/{{ $finding->id }}/file" alt="image not found"></td>
+      
     </tr>
     @endforeach
 </tbody>
-</table>  
+</table> 
+  {{ $findings->links() }} 
   <form method="POST" action="{{ route('logout') }}">
     @csrf
     <button type="submit">Выйти</button>

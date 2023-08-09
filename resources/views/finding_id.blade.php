@@ -8,6 +8,7 @@
     <h1>{{ $name }}</h1>
     <h2>{{ $location }}</h2>
     <h2>{{ $contacts }}</h2> 
+    <img src="/findings/{{ $find->id }}/file" alt="image not found">
     @if (Auth::check())
     <form action="/findings/{{ $find->id }}" method="POST">
       @csrf

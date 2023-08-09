@@ -20,6 +20,7 @@ class CreateTest extends DuskTestCase
                     ->type('name', 'Название находки')
                     ->type('location', 'Местонахождение находки')
                     ->type('contacts', 'Контакты для связи')
+                    ->attach('photo', storage_path('app/public/ok.jpg'))
                     ->press('Подтвердить');
 
             $lastFinding = \App\Models\Finding::orderBy('id', 'desc')->first();
