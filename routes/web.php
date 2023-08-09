@@ -31,8 +31,7 @@ Route::post('/findings/create', function(Request $request) {
     $find->location = $location;
     $find->contacts = $contacts;
     $find->media = $path;
-    $find->save();
-    
+    $find->save(); 
     return redirect('/findings');
 })->name('create');
 
@@ -42,14 +41,12 @@ Route::get('/findings/{id}', function (string $id) {
         ->with('name', $find->name)
         ->with('location', $find->location)
         ->with('contacts', $find->contacts)
-        ->with('find', $find);
-        
+        ->with('find', $find);    
 });
 Route::get('/findings/{id}/file', function (string $id) {
     $filepath = DB::table('findings')->where('id', $id)->value('media');
     $path = storage_path('app/' . $filepath);
-    return response()->file($path);
-    
+    return response()->file($path);   
 });
 
 Route::get('/findings', function () {
@@ -71,6 +68,7 @@ Route::delete('/findings/{id}', function ($id) {
     $finding->delete();
     return redirect('/findings');
 })->middleware('auth');
+
 Route::get('/findings/{id}/edit', function ($id) {
     $find = Finding::find($id);
     return view('finding_edit')
@@ -80,7 +78,7 @@ Route::get('/findings/{id}/edit', function ($id) {
     ->with('find', $find);
     });
     
-    Route::patch('/findings/{id}/edit', function ($id) {
+Route::patch('/findings/{id}/edit', function ($id) {
     $name = request('name');
     $location = request('location');
     $contacts = request('contacts');

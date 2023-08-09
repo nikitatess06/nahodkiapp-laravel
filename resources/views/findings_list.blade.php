@@ -14,8 +14,7 @@
   <tbody>
     @foreach ($findings as $finding)  
     <tr>
-      <td><a href="/findings/{{ $finding->id }}">{{ $finding->name }}</a><img src="/findings/{{ $finding->id }}/file" alt="image not found"></td>
-      
+      <td><a href="/findings/{{ $finding->id }}">{{ $finding->name }}</a><img src="/findings/{{ $finding->id }}/file" alt="image not found"></td>   
     </tr>
     @endforeach
 </tbody>

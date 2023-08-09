@@ -22,7 +22,6 @@ class CreateTest extends DuskTestCase
                     ->type('contacts', 'Контакты для связи')
                     ->attach('photo', storage_path('app/public/ok.jpg'))
                     ->press('Подтвердить');
-
             $lastFinding = \App\Models\Finding::orderBy('id', 'desc')->first();
             $this->assertDatabaseHas('findings', [
                 'id' => $lastFinding->id,
