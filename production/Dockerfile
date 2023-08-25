@@ -7,22 +7,18 @@ RUN apt-get update && apt-get install -y \
     git \
     && docker-php-ext-install pdo_mysql zip
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-    && apt-get install -y nodejs
+COPY ../ /var/www/html/
 
-COPY . /var/www/html/
 WORKDIR /var/www/html/
-RUN composer install --no-interaction --optimize-autoloader --no-dev \
-    && npm install \
-    && npm run prod
+RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-COPY production/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /var/www/html/
 EXPOSE 80
+
 CMD ["apache2-foreground"]
