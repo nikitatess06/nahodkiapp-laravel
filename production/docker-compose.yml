@@ -10,8 +10,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./:/var/www/html/
-      - ./env:/var/www/html/.env
+      - ./:./
+      - ./env:./.env
     environment:
       - DB_HOST=mysql
       - DB_PORT=3306
