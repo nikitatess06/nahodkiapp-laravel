@@ -20,10 +20,17 @@
 </tbody>
 </table> 
   {{ $findings->links() }} 
+  @if (Auth::check())
   <form method="POST" action="{{ route('logout') }}">
     @csrf
     <button type="submit">Выйти</button>
   </form>
+  @else
+  <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit">Войти</button>
+  </form>
+  @endif
   <form method="get" action="{{ route('create') }}">
     @csrf
     <button type="submit">Создать находку</button>

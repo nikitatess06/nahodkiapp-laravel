@@ -23,24 +23,30 @@ Route::get('/findings/create', function () {
 });
 Route::post('/findings/create', function(Request $request) {
     $name = $request->input('name');
-    $location = $request->input('location');
+    $latitude = $request->input('latitude');
+    $longitude = $request->input('longitude');
     $contacts = $request->input('contacts');
     $path = $request->file('photo')->store('media');
     $find = new App\Models\Finding;
     $find->name = $name;
-    $find->location = $location;
+    $find->latitude = $latitude;
+    $find->longitude = $longitude;
     $find->contacts = $contacts;
     $find->media = $path;
     $find->save(); 
     return redirect('/findings');
 })->name('create');
 
+
 Route::get('/findings/{id}', function (string $id) {
     $find = DB::table('findings')->where('id', $id)->first();
+    $findData = DB::table('findings')->where('id', $id)->select('latitude', 'longitude', 'name')->get();
     return view('finding_id')
         ->with('name', $find->name)
-        ->with('location', $find->location)
+        ->with('latitude', $find->latitude)
+        ->with('longitude', $find->longitude)
         ->with('contacts', $find->contacts)
+        ->with('findData', $findData)
         ->with('find', $find);    
 });
 Route::get('/findings/{id}/file', function (string $id) {
@@ -55,7 +61,9 @@ Route::get('/findings', function () {
 });
 
 Route::get('/', function () {
-    return redirect('/findings');
+    $lastFindings = DB::table('findings')->orderBy('created_at', 'desc')->take(10)->get();
+    $findingsData = DB::table('findings')->select('latitude', 'longitude', 'name')->get();
+    return view('main_screen', compact('lastFindings', 'findingsData'));
 })->name('home');
 
 Route::post('/logout', function () {
@@ -73,14 +81,12 @@ Route::get('/findings/{id}/edit', function ($id) {
     $find = Finding::find($id);
     return view('finding_edit')
     ->with('name', $find->name)
-    ->with('location', $find->location)
     ->with('contacts', $find->contacts)
     ->with('find', $find);
-    });
+    })->middleware('auth');
     
 Route::patch('/findings/{id}/edit', function ($id) {
     $name = request('name');
-    $location = request('location');
     $contacts = request('contacts');
     $affected = DB::table('findings')
     ->where('id', $id)

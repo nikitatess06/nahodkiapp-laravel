@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Tests\Browser;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -14,22 +15,25 @@ class CreateTest extends DuskTestCase
     public function testCreateFinding()
     {   
         $this->browse(function ($browser) {
+            $x = rand(0, 400);
+            $y = rand(0, 400);
             $browser->visit('/findings/create')
                     ->pause(1000)
                     ->assertSee('Создание новой находки')
                     ->type('name', 'Название находки')
-                    ->type('location', 'Местонахождение находки')
+                    ->click('.leaflet-container', $x, $y)
                     ->type('contacts', 'Контакты для связи')
                     ->attach('photo', storage_path('app/public/ok.jpg'))
-                    ->press('Подтвердить');
+                    ->press('Подтвердить');      
             $lastFinding = \App\Models\Finding::orderBy('id', 'desc')->first();
             $this->assertDatabaseHas('findings', [
                 'id' => $lastFinding->id,
                 'name' => 'Название находки',
-                'location' => 'Местонахождение находки',
                 'contacts' => 'Контакты для связи',
+                'latitude' => $lastFinding->latitude,
+                'longitude' => $lastFinding->longitude,
             ]);
         });
+        
     }
 }
-

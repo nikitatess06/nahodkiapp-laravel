@@ -13,7 +13,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->text('location');
+            $table->text('latitude');
+            $table->text('longitude');
             $table->text('contacts');
             $table->text('media')->nullable();
         });
