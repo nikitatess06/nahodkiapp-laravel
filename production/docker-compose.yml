@@ -9,9 +9,6 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-    volumes:
-      - ./:./
-      - ./env:./.env
     environment:
       - DB_HOST=mysql
       - DB_PORT=3306
@@ -20,6 +17,21 @@ services:
       - DB_PASSWORD=secret
     depends_on:
       - mysql
+    command: php artisan migrate
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      env_file:
+        - .env
+    container_name: my-web-app
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+
   mysql:
     image: mysql:5.7
     container_name: my-mysql-db
@@ -31,17 +43,17 @@ services:
       - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: my-phpmyadmin
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8081:80"
     environment:
       - PMA_ARBITRARY=1
       - MYSQL_ROOT_PASSWORD=secret
 
 volumes:
   db_data:
-
 
