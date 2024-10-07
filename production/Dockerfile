@@ -23,3 +23,4 @@ RUN a2enmod rewrite
 
 # Очищаем временные файлы и кэш
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+

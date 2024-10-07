@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('latitude');
             $table->text('longitude');
             $table->text('contacts');
+            $table->text('username');
             $table->text('media')->nullable();
         });
     }

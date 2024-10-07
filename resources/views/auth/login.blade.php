@@ -10,10 +10,20 @@
     @csrf
     <label for="name">Логин:</label>
     <input type="text" id="name" name="name" required><br><br>
-
+  
     <label for="location">Пароль:</label>
     <input type="text" id="password" name="password" required><br><br>
-    <input type="submit" value="Подтвердить">
+    <input type="submit" value="Подтвердить"><br></br>
+  </form>
+  <body>
+  <form action="{{ route ('password.request')}}" method="POST">
+    @csrf
+    <a href="{{ route('password.request') }}">Забыли пароль</a>
+  </form>
+  
+  <form action="{{ route ('register')}}" method="POST">
+    @csrf
+    <a href="{{ route('register') }}">Зарегистрироваться</a>
   </form>
   
   @if ($errors->any())

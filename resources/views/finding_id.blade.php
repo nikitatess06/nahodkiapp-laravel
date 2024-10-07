@@ -17,7 +17,7 @@
   <div id="map"></div>
     <h1>{{ $name }}</h1>
     <h2>{{ $contacts }}</h2> 
-    <img src="/findings/{{ $find->id }}/file" alt="image not found">
+    <img src="/findings/{{ $find->id }}/file?v={{ time()}}" alt="image not found">
     @if (Auth::check())
     <form action="/findings/{{ $find->id }}" method="POST">
       @csrf

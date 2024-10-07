@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         for ($i = 0; $i < 100; $i++) {
             DB::table('findings')->insert([
+            'username' => 'test_user',
             'name' => Str::random(100),
             'latitude' => rand(51.09 * 100000, 56.17 * 100000) / 100000,
             'longitude' => rand(23.18 * 100000, 32.75 * 100000) / 100000,
@@ -27,8 +28,9 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         DB::table('users')->insert([
-            'name' => Str::random(1),
+            'name' => 'bob',
             'password' => Hash::make('password'),
         ]);
+      
     }
 }

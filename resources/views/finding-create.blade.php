@@ -8,6 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 </head>
 <body>
+  
   <h1>Создание новой находки</h1>
   <form action="/findings/create" method="POST" enctype="multipart/form-data">
     @csrf
@@ -18,12 +19,15 @@
 
     <input type="hidden" id="latitude" name="latitude">
     <input type="hidden" id="longitude" name="longitude">
+    @error('longitude')
+    <div style="color: red">Выберите местонахождение</div>
+    @enderror
 
     <label for="contacts">Контакты:</label>
     <input type="text" id="contacts" name="contacts" required><br><br>
-
+  
     <label for="photo">Фото:</label>
-    <input type="file" id="photo" name="photo">
+    <input type="file" id="photo" name="photo" accept="image/*">
 
     <input type="submit" value="Подтвердить">
     

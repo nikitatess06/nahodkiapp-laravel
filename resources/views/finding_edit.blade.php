@@ -14,7 +14,7 @@
     <input type="text" value="{{$name}}" id="name" name="name" required><br><br>
 
     <label for="location">Местонахождение:</label>
-    <input type="text" value="{{$location}}" id="location" name="location" required><br><br>
+    
 
     <label for="contacts">Контакты:</label>
     <input type="text" value="{{$contacts}}" id="contacts" name="contacts" required><br><br>
